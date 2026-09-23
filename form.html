@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ELi 4.0 Volunteer Application — Engineering Ladies Initiative</title>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.4/dist/confetti.browser.min.js"></script>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Plus Jakarta Sans', sans-serif; }
+    
+    body {
+      background-color: #FFF0F4;
+      background-image: 
+        radial-gradient(at 10% 10%, rgba(255, 182, 193, 0.5) 0px, transparent 50%),
+        radial-gradient(at 90% 10%, rgba(229, 51, 80, 0.25) 0px, transparent 50%),
+        radial-gradient(at 50% 90%, rgba(255, 220, 228, 0.6) 0px, transparent 50%);
+      background-attachment: fixed;
+      color: #1E1B1E;
+      min-height: 100vh;
+      padding: 24px 15px 60px 15px;
+    }
+    
+    .container { max-width: 650px; margin: 0 auto; }
+    
+    .header-banner { text-align: center; margin-bottom: 24px; }
+    .header-banner img {
+      width: 100%; max-width: 650px; border-radius: 24px;
+      box-shadow: 0 12px 32px rgba(229, 51, 80, 0.15);
+      border: 1.5px solid rgba(255, 255, 255, 0.9);
+    }
+
+    .brand-row { display: flex; align-items: center; justify-content: center; gap: 12px; margin-bottom: 16px; }
+    .brand-row img { width: 46px; height: 46px; border-radius: 50%; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+    .brand-row span { font-size: 20px; font-weight: 800; color: #E53350; letter-spacing: -0.5px; }
+    
+    /* Frosted Glass Card */
+    .card {
+      background: rgba(255, 255, 255, 0.78);
+      backdrop-filter: blur(20px) saturate(180%);
+      -webkit-backdrop-filter: blur(20px) saturate(180%);
+      border-radius: 28px;
+      padding: 32px;
+      border: 1.5px solid rgba(255, 255, 255, 0.95);
+      box-shadow: 
+        0 20px 50px -10px rgba(229, 51, 80, 0.12),
+        inset 0 1px 1px rgba(255, 255, 255, 1);
+      margin-bottom: 24px;
+    }
+    
+    .welcome-card { border-top: 6px solid #E53350; }
+    .welcome-card h1 { color: #E53350; font-size: 28px; font-weight: 800; margin-bottom: 14px; line-height: 1.25; }
+    .welcome-card p { font-size: 15px; color: #3A2B35; line-height: 1.65; margin-bottom: 12px; }
+    .welcome-card .cta { color: #E53350; font-weight: 700; font-size: 15px; margin-top: 14px; }
+    
+    .form-group { margin-bottom: 24px; }
+    label { display: block; font-size: 14px; font-weight: 700; color: #1E1B1E; margin-bottom: 8px; }
+    label span { color: #E53350; }
+    
+    /* Frosted Glass Inputs */
+    input[type="text"], input[type="email"], input[type="tel"], select, textarea {
+      width: 100%;
+      padding: 14px 18px;
+      background: rgba(255, 255, 255, 0.65);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1.5px solid rgba(255, 182, 193, 0.6);
+      border-radius: 16px;
+      font-size: 14px;
+      color: #1E1B1E;
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.8);
+    }
+    input:focus, select:focus, textarea:focus {
+      outline: none;
+      border-color: #E53350;
+      background: rgba(255, 255, 255, 0.95);
+      box-shadow: 
+        0 0 0 4px rgba(229, 51, 80, 0.15),
+        0 4px 12px rgba(229, 51, 80, 0.08);
+    }
+    
+    .rr-link {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(10px);
+      color: #E53350; text-decoration: none;
+      font-size: 12.5px; font-weight: 700;
+      padding: 9px 18px; border-radius: 50px;
+      border: 1px solid rgba(255, 182, 193, 0.5);
+      margin-top: 6px; margin-bottom: 16px;
+      transition: all 0.2s;
+    }
+    .rr-link:hover { background: rgba(255, 255, 255, 0.95); transform: translateY(-1px); }
+    
+    .teams-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .team-box {
+      background: rgba(255, 255, 255, 0.65);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1.5px solid rgba(255, 192, 203, 0.5);
+      border-radius: 18px;
+      padding: 14px 16px;
+      cursor: pointer;
+      display: flex; align-items: center; justify-content: space-between;
+      font-size: 13.5px; font-weight: 600; color: #3A2B35;
+      transition: all 0.2s;
+    }
+    .team-box:hover { border-color: #E53350; background: rgba(255, 255, 255, 0.9); }
+    .team-box.selected {
+      background: rgba(255, 235, 240, 0.85);
+      backdrop-filter: blur(16px);
+      border-color: #E53350;
+      color: #E53350; font-weight: 700;
+      box-shadow: 0 8px 20px rgba(229, 51, 80, 0.15);
+    }
+    .tick-icon {
+      width: 22px; height: 22px; border-radius: 6px;
+      border: 1.5px solid #FFB8C4;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 12px; color: white; background: rgba(255,255,255,0.7);
+      transition: all 0.2s;
+    }
+    .team-box.selected .tick-icon { background: #E53350; border-color: #E53350; font-weight: 800; }
+    
+    .roles-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; }
+    .role-box {
+      background: rgba(255, 255, 255, 0.65);
+      backdrop-filter: blur(12px);
+      border: 1.5px solid rgba(255, 192, 203, 0.5);
+      border-radius: 16px;
+      padding: 14px 10px; text-align: center;
+      cursor: pointer; font-size: 13.5px; font-weight: 600; color: #3A2B35;
+      transition: all 0.2s;
+    }
+    .role-box:hover { border-color: #E53350; background: rgba(255, 255, 255, 0.9); }
+    .role-box.selected {
+      background: #E53350; color: white; border-color: #E53350; font-weight: 700;
+      box-shadow: 0 8px 20px rgba(229, 51, 80, 0.25);
+    }
+    
+    /* Glossy Action Button */
+    .btn-submit {
+      width: 100%;
+      background: linear-gradient(135deg, #E53350 0%, #FF5A75 100%);
+      color: white; border: none; padding: 18px;
+      border-radius: 18px; font-size: 16px; font-weight: 800;
+      cursor: pointer;
+      box-shadow: 0 10px 30px rgba(229, 51, 80, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.4);
+      transition: transform 0.25s, box-shadow 0.25s;
+    }
+    .btn-submit:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 14px 36px rgba(229, 51, 80, 0.45);
+    }
+    
+    .radar-card { display: none; text-align: center; padding: 40px 24px; }
+    .radar-card h2 { color: #E53350; font-size: 26px; font-weight: 800; margin-top: 16px; margin-bottom: 14px; }
+    .radar-card p {
+      font-size: 15px; color: #3A2B35; line-height: 1.65;
+      background: rgba(255, 240, 244, 0.8); backdrop-filter: blur(12px);
+      padding: 22px; border-radius: 20px; border: 1px solid rgba(255, 224, 230, 0.8);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    
+    <!-- ELi Official Banner Image -->
+    <div class="header-banner">
+      <img src="./public/eli-banner.png" alt="Engineering Ladies Initiative Banner" />
+    </div>
+
+    <!-- Cute Frosted Glass Welcome Card -->
+    <div class="card welcome-card">
+      <div class="brand-row">
+        <img src="./public/eli-logo.png" alt="ELi Logo" />
+        <span>ELi 4.0 Recruitment</span>
+      </div>
+      <h1>Hey girl, welcome to ELi!</h1>
+      <p><strong>We’re so excited that you’re interested in being part of the team.</strong></p>
+      <p>ELi is a community of ambitious women in engineering who are here to connect, grow, create and make things happen and we’d love to have you be part of it</p>
+      <p class="cta">Ready to join us? Let’s get to know you 💕</p>
+    </div>
+
+    <!-- Form -->
+    <form id="eliForm" class="card">
+      
+      <div class="form-group">
+        <label>Full Name <span>*</span></label>
+        <input type="text" id="name" required placeholder="Ada Lovelace">
+      </div>
+
+      <div class="form-group">
+        <label>Email <span>*</span></label>
+        <input type="email" id="email" required placeholder="you@example.com">
+      </div>
+
+      <div class="form-group">
+        <label>Phone number (WhatsApp) <span>*</span></label>
+        <input type="tel" id="phone" required placeholder="+234 800 000 0000">
+      </div>
+
+      <!-- Department Dropdown -->
+      <div class="form-group">
+        <label>Are you in engineering? Select your department <span>*</span></label>
+        <select id="engineering_dept" required>
+          <option value="" disabled selected>Select Department...</option>
+          <option value="Biomedical Engineering">Biomedical Engineering</option>
+          <option value="Chemical Engineering">Chemical Engineering</option>
+          <option value="Civil and Environmental Engineering">Civil and Environmental Engineering</option>
+          <option value="Computer Engineering">Computer Engineering</option>
+          <option value="Electrical and Electronics Engineering">Electrical and Electronics Engineering</option>
+          <option value="Mechanical Engineering">Mechanical Engineering</option>
+          <option value="Metallurgical and Materials Engineering">Metallurgical and Materials Engineering</option>
+          <option value="Petroleum and Gas Engineering">Petroleum and Gas Engineering</option>
+          <option value="Systems Engineering">Systems Engineering</option>
+          <option value="Not in Engineering / Other">Not in Engineering / Other Faculty</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>If not in Engineering, specify your faculty/department</label>
+        <input type="text" id="non_engineering" placeholder="e.g. Computer Science, Faculty of Science">
+      </div>
+
+      <div class="form-group">
+        <label>Level <span>*</span></label>
+        <select id="level" required>
+          <option value="" disabled selected>Select Level...</option>
+          <option value="100 Level">100 Level</option>
+          <option value="200 Level">200 Level</option>
+          <option value="300 Level">300 Level</option>
+          <option value="400 Level">400 Level</option>
+          <option value="500 Level">500 Level</option>
+          <option value="Postgraduate">Postgraduate</option>
+          <option value="Alumna">Alumna</option>
+        </select>
+      </div>
+
+      <!-- Teams Section -->
+      <div class="form-group">
+        <label>Which team are you most interested in <span>*</span></label>
+        <div style="font-size: 12.5px; color: #555; margin-bottom: 6px;">If you’re not sure of which to join, kindly go through the R and R expected from each teams:</div>
+        <a href="https://docs.google.com/document/d/1dCbhSMp29WAuXs75mYSwqaxSHRCk3fe0s0kRLH7IEKs/edit?usp=drivesdk" target="_blank" class="rr-link">📄 View Teams R & R Document ↗</a>
+        
+        <div class="teams-grid" id="teamsGrid">
+          <div class="team-box" onclick="toggleTeam(this, 'Content')"><span>Content</span><div class="tick-icon">✓</div></div>
+          <div class="team-box" onclick="toggleTeam(this, 'Sponsorship')"><span>Sponsorship</span><div class="tick-icon">✓</div></div>
+          <div class="team-box" onclick="toggleTeam(this, 'Marketing')"><span>Marketing</span><div class="tick-icon">✓</div></div>
+          <div class="team-box" onclick="toggleTeam(this, 'Logistics')"><span>Logistics</span><div class="tick-icon">✓</div></div>
+          <div class="team-box" onclick="toggleTeam(this, 'Training')"><span>Training</span><div class="tick-icon">✓</div></div>
+          <div class="team-box" onclick="toggleTeam(this, 'Operations')"><span>Operations</span><div class="tick-icon">✓</div></div>
+          <div class="team-box" onclick="toggleTeam(this, 'Design')"><span>Design</span><div class="tick-icon">✓</div></div>
+          <div class="team-box" onclick="toggleTeam(this, 'Quality Control')"><span>Quality Control</span><div class="tick-icon">✓</div></div>
+          <div class="team-box" onclick="toggleTeam(this, 'External Relations')"><span>External Relations</span><div class="tick-icon">✓</div></div>
+          <div class="team-box" onclick="toggleTeam(this, 'Web Development')"><span>Web Development</span><div class="tick-icon">✓</div></div>
+        </div>
+      </div>
+
+      <!-- Role Section -->
+      <div class="form-group">
+        <label>Role <span>*</span></label>
+        <div class="roles-grid">
+          <div class="role-box" onclick="selectRole(this, 'Team Lead')">Team Lead</div>
+          <div class="role-box" onclick="selectRole(this, 'Deputy Team Lead')">Deputy Team Lead</div>
+          <div class="role-box" onclick="selectRole(this, 'Team Member')">Team Member</div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Why would you want to join ELi 4.0? <span>*</span></label>
+        <textarea id="why_join" rows="3" required placeholder="Tell us what excites you..."></textarea>
+      </div>
+
+      <div class="form-group">
+        <label>What skills/strength would you bring to the team? <span>*</span></label>
+        <textarea id="skills" rows="3" required placeholder="Share your strengths..."></textarea>
+      </div>
+
+      <div class="form-group">
+        <label>Have you ever volunteered or held a leadership role? If yes, share the experience with us <span>*</span></label>
+        <textarea id="previous_volunteering" rows="3" required placeholder="Share your past roles..."></textarea>
+      </div>
+
+      <div class="form-group">
+        <label>How much time can you commit to ELi activities <span>*</span></label>
+        <select id="time_commitment" required>
+          <option value="" disabled selected>Select Commitment...</option>
+          <option value="2 - 4 hours per week">2 - 4 hours per week</option>
+          <option value="5 - 8 hours per week">5 - 8 hours per week</option>
+          <option value="8+ hours per week">8+ hours per week</option>
+        </select>
+      </div>
+
+      <button type="submit" class="btn-submit">Submit Application 💖</button>
+
+    </form>
+
+    <!-- Radar Celebration Screen -->
+    <div id="radarScreen" class="card radar-card">
+      <img src="./public/eli-logo.png" alt="ELi Logo" style="width: 70px; height: 70px; margin: 0 auto 10px auto; display: block;" />
+      <h2>YOU’RE OFFICIALLY ON OUR RADAR!</h2>
+      <p>
+        Thank you for volunteering with ELi. Your application has been received, and we’re so excited about the possibility of having you on our team.<br><br>
+        Keep an eye on your email/WhatsApp for the next steps.
+      </p>
+    </div>
+
+  </div>
+
+  <script>
+    let selectedTeams = [];
+    let selectedRole = '';
+
+    function toggleTeam(el, team) {
+      if (selectedTeams.includes(team)) {
+        selectedTeams = selectedTeams.filter(t => t !== team);
+        el.classList.remove('selected');
+      } else {
+        selectedTeams.push(team);
+        el.classList.add('selected');
+      }
+    }
+
+    function selectRole(el, role) {
+      document.querySelectorAll('.role-box').forEach(b => b.classList.remove('selected'));
+      el.classList.add('selected');
+      selectedRole = role;
+    }
+
+    document.getElementById('eliForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      if (selectedTeams.length === 0) {
+        alert('Please tap to select at least one team!');
+        return;
+      }
+      if (!selectedRole) {
+        alert('Please select a role!');
+        return;
+      }
+
+      confetti({ particleCount: 120, spread: 70, origin: { y: 0.6 }, colors: ['#E53350', '#FF85A0', '#FFDE59'] });
+      document.getElementById('eliForm').style.display = 'none';
+      document.getElementById('radarScreen').style.display = 'block';
+    });
+  </script>
+</body>
+</html>
