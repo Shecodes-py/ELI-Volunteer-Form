@@ -13,6 +13,7 @@ Built with a soft white and pink frosted glassmorphism interface, it submits res
 - **Interactive Team Grid**: 10 clickable team boxes (*Content, Sponsorship, Marketing, Logistics, Training, Operations, Design, Quality Control, External Relations, Web Development*) with checkmark indicators.
 - **R & R Google Doc Link**: Direct callout button linking to the ELi Teams Roles & Responsibilities document.
 - **Faculty of Engineering Dropdown**: Includes all 9 engineering departments (*Biomedical, Chemical, Civil, Computer, Electrical, Mechanical, Metallurgical, Petroleum, Systems*) + optional non-engineering field.
+- **Vercel Analytics Integrated**: Includes `@vercel/analytics/react` component for tracking form visits and conversions on Vercel.
 - **Dual Deployment Options**:
   1. **Single-File Standalone HTML** (`form.html`): Zero dependencies, double-click to run anywhere.
   2. **React + Vite Web App**: Optimized SPA ready for Vercel/Netlify hosting.

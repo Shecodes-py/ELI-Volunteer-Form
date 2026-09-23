@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Analytics } from '@vercel/analytics/react';
 import Navbar from './components/Navbar';
 import FormRenderer from './components/FormRenderer';
 import AppsScriptGuide from './components/AppsScriptGuide';
@@ -9,7 +10,7 @@ export default function App() {
   const [appsScriptUrl, setAppsScriptUrl] = useState('');
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#FFF0F5] text-[#2D1B2D]">
+    <div className="min-h-screen flex flex-col bg-[#FFF0F4] text-[#2D1B2D]">
       
       {/* Clean White & Pink Navbar */}
       <Navbar showGuide={showGuide} setShowGuide={setShowGuide} />
@@ -19,7 +20,7 @@ export default function App() {
         {showGuide ? (
           <div className="max-w-3xl mx-auto px-4 py-6 space-y-4">
             <div className="pink-card p-6 space-y-3">
-              <h2 className="text-lg font-bold text-pink-600">Google Apps Script Web App URL</h2>
+              <h2 className="text-lg font-bold text-[#E53350]">Google Apps Script Web App URL</h2>
               <p className="text-xs text-slate-600">
                 Paste your deployed Google Apps Script Web App URL below so responses write directly to your Google Sheet:
               </p>
@@ -44,6 +45,9 @@ export default function App() {
           💖 Engineering Ladies Initiative (ELi 4.0) — Government for the girls, by the girls, with the girls
         </p>
       </footer>
+
+      {/* Vercel Analytics */}
+      <Analytics />
 
     </div>
   );
