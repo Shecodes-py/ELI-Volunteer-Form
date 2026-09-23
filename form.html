@@ -314,6 +314,9 @@
   </div>
 
   <script>
+    // Paste your Google Apps Script Web App URL here when ready:
+    const GOOGLE_APPS_SCRIPT_URL = ""; 
+
     let selectedTeams = [];
     let selectedRole = '';
 
@@ -333,7 +336,7 @@
       selectedRole = role;
     }
 
-    document.getElementById('eliForm').addEventListener('submit', function(e) {
+    document.getElementById('eliForm').addEventListener('submit', async function(e) {
       e.preventDefault();
       if (selectedTeams.length === 0) {
         alert('Please tap to select at least one team!');
@@ -342,6 +345,32 @@
       if (!selectedRole) {
         alert('Please select a role!');
         return;
+      }
+
+      const payload = {
+        full_name: document.getElementById('name').value,
+        email: document.getElementById('email').value,
+        phone: document.getElementById('phone').value,
+        engineering_dept: document.getElementById('engineering_dept').value,
+        non_engineering: document.getElementById('non_engineering').value,
+        level: document.getElementById('level').value,
+        role: selectedRole,
+        teams_interested: selectedTeams.join(', '),
+        why_join: document.getElementById('why_join').value,
+        skills: document.getElementById('skills').value,
+        previous_volunteering: document.getElementById('previous_volunteering').value,
+        time_commitment: document.getElementById('time_commitment').value,
+        submitted_at: new Date().toLocaleString()
+      };
+
+      if (GOOGLE_APPS_SCRIPT_URL) {
+        try {
+          await fetch(GOOGLE_APPS_SCRIPT_URL, {
+            method: 'POST',
+            headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+            body: JSON.stringify(payload)
+          });
+        } catch (err) { console.log(err); }
       }
 
       confetti({ particleCount: 120, spread: 70, origin: { y: 0.6 }, colors: ['#E53350', '#FF85A0', '#FFDE59'] });
