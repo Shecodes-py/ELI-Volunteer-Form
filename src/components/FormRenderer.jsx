@@ -12,6 +12,7 @@ const ENGINEERING_DEPARTMENTS = [
   "Mechanical Engineering",
   "Metallurgical and Materials Engineering",
   "Petroleum and Gas Engineering",
+  "Surveying and Geoinformatics Engineering",
   "Systems Engineering",
   "Not in Engineering / Other Faculty"
 ];
@@ -267,8 +268,7 @@ export default function FormRenderer({ appsScriptUrl }) {
             <option value="300 Level">300 Level</option>
             <option value="400 Level">400 Level</option>
             <option value="500 Level">500 Level</option>
-            <option value="Postgraduate">Postgraduate</option>
-            <option value="Alumna">Alumna</option>
+            <option value="600 Level">600 Level</option>
           </select>
         </div>
 

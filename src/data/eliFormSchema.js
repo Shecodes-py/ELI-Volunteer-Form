@@ -10,7 +10,7 @@ export const ELI_VOLUNTEER_FORM_SCHEMA = {
   welcome: {
     heading: "Hey girl, welcome to ELi! ✨",
     subheading: "We’re so excited that you’re interested in being part of the team.",
-    body: "ELi is a community of ambitious women in engineering who are here to connect, grow, create and make things happen and we’d love to have you be part of it.",
+    body: "ELi is a community of ambitious women in engineering, built to help you connect, grow and make things happen. We'd love to have you be a part of it.",
     cta: "Ready to join us? Let’s get to know you 💕"
   },
 
@@ -68,8 +68,7 @@ export const ELI_VOLUNTEER_FORM_SCHEMA = {
             "300 Level",
             "400 Level",
             "500 Level",
-            "Postgraduate",
-            "Alumna",
+            "600 Level",
             "Other"
           ]
         }
