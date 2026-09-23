@@ -138,4 +138,4 @@ function doPost(e) {
 
 ## 💖 License & Community
 
-Created for **Engineering Ladies Initiative (ELi)** — Empowering women in engineering to connect, grow, create, and lead.
+Created for **Engineering Ladies Initiative (ELi)** — Government for the girls, by the girls, with the girls.

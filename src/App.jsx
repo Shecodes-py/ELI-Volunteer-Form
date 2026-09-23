@@ -40,8 +40,8 @@ export default function App() {
 
       {/* Footer */}
       <footer className="py-6 text-center text-xs text-pink-400 border-t border-pink-100">
-        <p className="font-medium">
-          💖 Engineering Ladies Initiative (ELi 4.0) — Empowering Women in Tech
+        <p className="font-semibold">
+          💖 Engineering Ladies Initiative (ELi 4.0) — Government for the girls, by the girls, with the girls
         </p>
       </footer>
 
