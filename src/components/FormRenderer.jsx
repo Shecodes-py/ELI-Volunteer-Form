@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import confetti from 'canvas-confetti';
-import { Send, RefreshCw } from 'lucide-react';
+import { Send, Sparkles, RefreshCw, ExternalLink, MessageCircle } from 'lucide-react';
 import TeamSelectorCard from './TeamSelectorCard';
 
 const ENGINEERING_DEPARTMENTS = [
@@ -12,9 +12,37 @@ const ENGINEERING_DEPARTMENTS = [
   "Mechanical Engineering",
   "Metallurgical and Materials Engineering",
   "Petroleum and Gas Engineering",
-  "Surveying and Geoinformatics Engineering",
   "Systems Engineering",
   "Not in Engineering / Other Faculty"
+];
+
+const WHATSAPP_GC_LINK = "https://chat.whatsapp.com/CxqAfQeJAL56uUae1wJ4FA?mode=gi_t";
+
+const SOCIAL_LINKS = [
+  {
+    name: "Instagram",
+    icon: "📸",
+    url: "https://www.instagram.com/eliunilag?stkn=bTN5Z3EyZjgzcGtq",
+    handle: "@eliunilag"
+  },
+  {
+    name: "TikTok",
+    icon: "🎵",
+    url: "https://www.tiktok.com/@eliunilag?_r=1&_t=ZS-99wtrebMSU0",
+    handle: "@eliunilag"
+  },
+  {
+    name: "Twitter / X",
+    icon: "🐦",
+    url: "https://x.com/eliunilag",
+    handle: "@eliunilag"
+  },
+  {
+    name: "LinkedIn",
+    icon: "💼",
+    url: "https://www.linkedin.com/company/engineering-ladies-initiative/",
+    handle: "ELi Initiative"
+  }
 ];
 
 export default function FormRenderer({ appsScriptUrl }) {
@@ -70,10 +98,10 @@ export default function FormRenderer({ appsScriptUrl }) {
       }
 
       confetti({
-        particleCount: 120,
-        spread: 70,
-        origin: { y: 0.6 },
-        colors: ['#E53350', '#FF85A0', '#FFDE59']
+        particleCount: 150,
+        spread: 80,
+        origin: { y: 0.5 },
+        colors: ['#E53350', '#FF85A0', '#FFDE59', '#FF4D8D', '#25D366']
       });
 
       setIsSubmitted(true);
@@ -86,29 +114,95 @@ export default function FormRenderer({ appsScriptUrl }) {
     }
   };
 
-  // CLOSING RADAR CELEBRATION SCREEN
+  // CUTESY CLOSING RADAR & COMMUNITY GC SCREEN
   if (isSubmitted) {
     return (
-      <div className="max-w-xl mx-auto px-4 py-12">
-        <div className="pink-card p-8 sm:p-10 text-center space-y-6">
+      <div className="max-w-xl mx-auto px-4 py-8 space-y-6">
+        <div className="pink-card p-6 sm:p-10 text-center space-y-6">
           
           <img 
             src="/eli-logo.png" 
             alt="ELi Logo" 
-            className="w-20 h-20 mx-auto rounded-full shadow-md object-cover" 
+            className="w-20 h-20 mx-auto rounded-full shadow-md object-cover ring-4 ring-pink-100" 
           />
 
           <div className="space-y-2">
-            <span className="inline-block px-3 py-1 rounded-full bg-pink-100 text-[#E53350] text-xs font-bold uppercase tracking-wider">
-              Application Confirmed
+            <span className="inline-block px-3.5 py-1 rounded-full bg-pink-100 text-[#E53350] text-xs font-bold uppercase tracking-wider">
+              Application Confirmed 🎉
             </span>
             <h2 className="text-2xl sm:text-3xl font-extrabold font-display text-[#E53350]">
-              YOU’RE OFFICIALLY ON OUR RADAR!
+              YOU’RE OFFICIALLY ON OUR RADAR! 💖
             </h2>
           </div>
 
-          <div className="p-6 rounded-2xl bg-pink-50/70 border border-pink-100 text-slate-800 text-sm leading-relaxed whitespace-pre-line text-left sm:text-center">
-            {"Thank you for volunteering with ELi. Your application has been received, and we’re so excited about the possibility of having you on our team.\n\nKeep an eye on your email/WhatsApp for the next steps."}
+          <div className="p-6 rounded-2xl bg-pink-50/80 border border-pink-100 text-slate-800 text-sm leading-relaxed whitespace-pre-line text-left sm:text-center">
+            {"Thank you for volunteering with ELi! Your application has been received, and we’re so excited about the possibility of having you on our team.\n\nKeep an eye on your email/WhatsApp for the next steps."}
+          </div>
+
+          {/* 💬 WHATSAPP COMMUNITY GROUP CARD */}
+          <div className="p-6 rounded-2xl bg-gradient-to-br from-emerald-50 via-pink-50 to-white border-2 border-emerald-200/80 shadow-sm space-y-3.5 text-center">
+            <div className="w-12 h-12 mx-auto rounded-full bg-emerald-500 text-white flex items-center justify-center shadow-md shadow-emerald-500/20">
+              <MessageCircle className="w-6 h-6" />
+            </div>
+            
+            <div className="space-y-1">
+              <h3 className="text-base font-extrabold text-slate-900">
+                Join the ELi WhatsApp Community! 💬✨
+              </h3>
+              <p className="text-xs text-slate-600 max-w-md mx-auto leading-relaxed">
+                Don't miss any recruitment announcements! Join our official WhatsApp group chat to connect with the girls and stay updated on the next steps.
+              </p>
+            </div>
+
+            <a
+              href={WHATSAPP_GC_LINK}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center justify-center space-x-2 px-6 py-3.5 rounded-2xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-sm shadow-lg shadow-emerald-600/30 transition-all hover:scale-[1.02] w-full sm:w-auto"
+            >
+              <span>Join ELi WhatsApp Community GC 💬</span>
+              <ExternalLink className="w-4 h-4" />
+            </a>
+          </div>
+
+          {/* CUTESY SOCIAL MEDIA LINKS SECTION */}
+          <div className="p-6 rounded-2xl bg-pink-50/50 border border-pink-200 space-y-4 text-left">
+            
+            <div className="text-center space-y-1">
+              <h3 className="text-base font-extrabold text-[#E53350]">
+                Stay Connected With Us 💕
+              </h3>
+              <p className="text-xs text-slate-600 leading-snug">
+                ✨ <strong>Pro-Tip:</strong> Want to boost your spot on the team? Join the WhatsApp GC, follow us across all socials, engage with our posts, and stay active — we love seeing passionate girls in our comments! 😍🩷
+              </p>
+            </div>
+
+            {/* Cutesy Soft Pink Social Buttons */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 pt-1">
+              {SOCIAL_LINKS.map(s => (
+                <a
+                  key={s.name}
+                  href={s.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="p-3.5 rounded-2xl bg-white hover:bg-pink-100/60 border border-pink-200 transition-all flex items-center justify-between shadow-2xs group"
+                >
+                  <div className="flex items-center space-x-2.5">
+                    <span className="text-base">{s.icon}</span>
+                    <div className="text-left">
+                      <span className="block font-bold text-xs text-slate-900 group-hover:text-[#E53350] transition-colors">
+                        {s.name}
+                      </span>
+                      <span className="block text-[11px] text-pink-600 font-medium">
+                        {s.handle}
+                      </span>
+                    </div>
+                  </div>
+                  <ExternalLink className="w-3.5 h-3.5 text-pink-400 group-hover:text-[#E53350] transition-colors" />
+                </a>
+              ))}
+            </div>
+
           </div>
 
           <button
@@ -125,6 +219,7 @@ export default function FormRenderer({ appsScriptUrl }) {
             <RefreshCw className="w-4 h-4" />
             <span>Submit another response</span>
           </button>
+
         </div>
       </div>
     );
@@ -268,7 +363,8 @@ export default function FormRenderer({ appsScriptUrl }) {
             <option value="300 Level">300 Level</option>
             <option value="400 Level">400 Level</option>
             <option value="500 Level">500 Level</option>
-            <option value="600 Level">600 Level</option>
+            <option value="Postgraduate">Postgraduate</option>
+            <option value="Alumna">Alumna</option>
           </select>
         </div>
 

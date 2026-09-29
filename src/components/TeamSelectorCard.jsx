@@ -39,7 +39,7 @@ export default function TeamSelectorCard({ selectedTeams = [], onChange, rrDocUr
         
         {/* R & R Google Doc Link Button */}
         <a
-          href={rrDocUrl || "https://docs.google.com/document/d/1dCbhSMp29WAuXs75mYSwqaxSHRCk3fe0s0kRLH7IEKs/edit?usp=drivesdk"}
+          href={rrDocUrl || "https://docs.google.com/document/d/1T_2BA6HJObHYxsTqN916tnG_l3V9mNJT5K74ZKjX_oY/edit?usp=sharing"}
           target="_blank"
           rel="noopener noreferrer"
           className="inline-flex items-center space-x-1.5 mt-2 px-4 py-1.5 rounded-full bg-white/70 hover:bg-white backdrop-blur-md text-[#E53350] text-xs font-bold border border-pink-200 shadow-xs transition-all hover:scale-[1.02]"

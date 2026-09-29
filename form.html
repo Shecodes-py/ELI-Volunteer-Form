@@ -157,7 +157,44 @@
       font-size: 15px; color: #3A2B35; line-height: 1.65;
       background: rgba(255, 240, 244, 0.8); backdrop-filter: blur(12px);
       padding: 22px; border-radius: 20px; border: 1px solid rgba(255, 224, 230, 0.8);
+      margin-bottom: 24px;
     }
+
+    /* WhatsApp GC Banner Card */
+    .whatsapp-card {
+      background: linear-gradient(135deg, #ECFDF5 0%, #FFF0F4 100%);
+      border: 2px solid rgba(16, 185, 129, 0.4);
+      border-radius: 20px; padding: 22px; text-align: center; margin-bottom: 20px;
+    }
+    .whatsapp-card h3 { color: #065F46; font-size: 16px; font-weight: 800; margin-bottom: 6px; }
+    .whatsapp-card p { font-size: 12.5px; color: #374151; margin-bottom: 14px; line-height: 1.5; background: none; border: none; padding: 0; }
+    .btn-whatsapp {
+      display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+      background: #059669; color: white; text-decoration: none;
+      padding: 14px 24px; border-radius: 16px; font-size: 14px; font-weight: 800;
+      box-shadow: 0 6px 20px rgba(5, 150, 105, 0.25); transition: transform 0.2s;
+    }
+    .btn-whatsapp:hover { transform: translateY(-2px); }
+
+    /* Cutesy Social Media Grid */
+    .social-section {
+      background: rgba(255, 255, 255, 0.9);
+      border: 1px solid rgba(255, 182, 193, 0.6);
+      border-radius: 20px; padding: 20px; text-align: left;
+    }
+    .social-section h3 { color: #E53350; font-size: 16px; font-weight: 800; text-align: center; margin-bottom: 6px; }
+    .social-hint { font-size: 12.5px; color: #555; text-align: center; margin-bottom: 16px; line-height: 1.5; }
+    .social-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .social-card {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 12px 14px; border-radius: 16px; text-decoration: none;
+      background: white; border: 1.5px solid #FFE0E6; color: #1E1B1E; transition: all 0.2s;
+    }
+    .social-card:hover { border-color: #E53350; background: #FFF5F7; transform: translateY(-1px); }
+    .social-info { display: flex; align-items: center; gap: 8px; }
+    .social-name { font-size: 13px; font-weight: 800; color: #1E1B1E; display: block; }
+    .social-handle { font-size: 11px; font-weight: 600; color: #E53350; display: block; }
+
     .footer-slogan { text-align: center; margin-top: 24px; font-size: 13.5px; font-weight: 700; color: #E53350; }
   </style>
 </head>
@@ -213,7 +250,6 @@
           <option value="Mechanical Engineering">Mechanical Engineering</option>
           <option value="Metallurgical and Materials Engineering">Metallurgical and Materials Engineering</option>
           <option value="Petroleum and Gas Engineering">Petroleum and Gas Engineering</option>
-          <option value="Surveying and Geoinformatics Engineering">Surveying and Geoinformatics Engineering</option>
           <option value="Systems Engineering">Systems Engineering</option>
           <option value="Not in Engineering / Other">Not in Engineering / Other Faculty</option>
         </select>
@@ -233,7 +269,8 @@
           <option value="300 Level">300 Level</option>
           <option value="400 Level">400 Level</option>
           <option value="500 Level">500 Level</option>
-          <option value="600 Level">600 Level</option>
+          <option value="Postgraduate">Postgraduate</option>
+          <option value="Alumna">Alumna</option>
         </select>
       </div>
 
@@ -298,12 +335,75 @@
 
     <!-- Radar Celebration Screen -->
     <div id="radarScreen" class="card radar-card">
-      <img src="./public/eli-logo.png" alt="ELi Logo" style="width: 70px; height: 70px; margin: 0 auto 10px auto; display: block;" />
-      <h2>YOU’RE OFFICIALLY ON OUR RADAR!</h2>
+      <img src="./public/eli-logo.png" alt="ELi Logo" style="width: 75px; height: 75px; margin: 0 auto 10px auto; display: block; border-radius: 50%;" />
+      <h2>YOU’RE OFFICIALLY ON OUR RADAR! 🚀💖</h2>
       <p>
-        Thank you for volunteering with ELi. Your application has been received, and we’re so excited about the possibility of having you on our team.<br><br>
+        Thank you for volunteering with ELi! Your application has been received, and we’re so excited about the possibility of having you on our team.<br><br>
         Keep an eye on your email/WhatsApp for the next steps.
       </p>
+
+      <!-- WHATSAPP COMMUNITY GROUP CARD -->
+      <div class="whatsapp-card">
+        <h3>Join the ELi WhatsApp Community! 💬✨</h3>
+        <p>Don't miss any recruitment announcements! Join our official WhatsApp group chat to connect with the girls and stay updated on the next steps.</p>
+        <a href="https://chat.whatsapp.com/CxqAfQeJAL56uUae1wJ4FA?mode=gi_t" target="_blank" class="btn-whatsapp">
+          <span>Join ELi WhatsApp Community GC 💬 ↗</span>
+        </a>
+      </div>
+
+      <!-- CUTESY SOCIAL MEDIA LINKS CARD -->
+      <div class="social-section">
+        <h3>Stay Connected With Us 💕</h3>
+        <div class="social-hint">
+          ✨ <strong>Pro-Tip:</strong> Want to boost your spot on the team? Join the WhatsApp GC, follow us across all socials, engage with our posts, and stay active — we love seeing passionate girls in our comments! 😍🩷
+        </div>
+
+        <div class="social-grid">
+          <a href="https://www.instagram.com/eliunilag?stkn=bTN5Z3EyZjgzcGtq" target="_blank" class="social-card">
+            <div class="social-info">
+              <span>📸</span>
+              <div>
+                <span class="social-name">Instagram</span>
+                <span class="social-handle">@eliunilag</span>
+              </div>
+            </div>
+            <span style="color: #E53350; font-weight: bold;">↗</span>
+          </a>
+
+          <a href="https://www.tiktok.com/@eliunilag?_r=1&_t=ZS-99wtrebMSU0" target="_blank" class="social-card">
+            <div class="social-info">
+              <span>🎵</span>
+              <div>
+                <span class="social-name">TikTok</span>
+                <span class="social-handle">@eliunilag</span>
+              </div>
+            </div>
+            <span style="color: #E53350; font-weight: bold;">↗</span>
+          </a>
+
+          <a href="https://x.com/eliunilag" target="_blank" class="social-card">
+            <div class="social-info">
+              <span>🐦</span>
+              <div>
+                <span class="social-name">Twitter / X</span>
+                <span class="social-handle">@eliunilag</span>
+              </div>
+            </div>
+            <span style="color: #E53350; font-weight: bold;">↗</span>
+          </a>
+
+          <a href="https://www.linkedin.com/company/engineering-ladies-initiative/" target="_blank" class="social-card">
+            <div class="social-info">
+              <span>💼</span>
+              <div>
+                <span class="social-name">LinkedIn</span>
+                <span class="social-handle">ELi Initiative</span>
+              </div>
+            </div>
+            <span style="color: #E53350; font-weight: bold;">↗</span>
+          </a>
+        </div>
+      </div>
     </div>
 
     <!-- Footer Slogan -->
@@ -373,7 +473,7 @@
         } catch (err) { console.log(err); }
       }
 
-      confetti({ particleCount: 120, spread: 70, origin: { y: 0.6 }, colors: ['#E53350', '#FF85A0', '#FFDE59'] });
+      confetti({ particleCount: 140, spread: 80, origin: { y: 0.5 }, colors: ['#E53350', '#FF85A0', '#FFDE59', '#FF4D8D'] });
       document.getElementById('eliForm').style.display = 'none';
       document.getElementById('radarScreen').style.display = 'block';
     });

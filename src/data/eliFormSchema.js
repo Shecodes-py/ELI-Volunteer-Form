@@ -14,7 +14,7 @@ export const ELI_VOLUNTEER_FORM_SCHEMA = {
     cta: "Ready to join us? Let’s get to know you 💕"
   },
 
-  rrDocUrl: "https://docs.google.com/document/d/1dCbhSMp29WAuXs75mYSwqaxSHRCk3fe0s0kRLH7IEKs/edit?usp=drivesdk",
+  rrDocUrl: "https://docs.google.com/document/d/1T_2BA6HJObHYxsTqN916tnG_l3V9mNJT5K74ZKjX_oY/edit?usp=sharing",
   
   sections: [
     {
