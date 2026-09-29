@@ -16,13 +16,17 @@ const TEAMS_LIST = [
 
 export default function TeamSelectorCard({ selectedTeams = [], onChange, rrDocUrl }) {
   const handleToggle = (team) => {
-    let updated = [];
     if (selectedTeams.includes(team)) {
-      updated = selectedTeams.filter(t => t !== team);
+      // Unselect
+      onChange(selectedTeams.filter(t => t !== team));
     } else {
-      updated = [...selectedTeams, team];
+      // Select - max 2 teams allowed!
+      if (selectedTeams.length >= 2) {
+        alert("You can select a maximum of 2 teams!");
+        return;
+      }
+      onChange([...selectedTeams, team]);
     }
-    onChange(updated);
   };
 
   return (
@@ -30,16 +34,26 @@ export default function TeamSelectorCard({ selectedTeams = [], onChange, rrDocUr
       
       {/* Label & Description */}
       <div>
-        <label className="block text-base font-bold text-slate-900 mb-1">
-          Which team are you most interested in <span className="text-[#E53350]">*</span>
-        </label>
-        <p className="text-xs text-slate-600">
-          If you’re not sure of which to join, kindly go through the R and R expected from each teams:
+        <div className="flex items-center justify-between">
+          <label className="block text-base font-bold text-slate-900">
+            Which team are you most interested in <span className="text-[#E53350]">*</span>
+          </label>
+          <span className={`text-xs font-bold px-2.5 py-0.5 rounded-full border ${
+            selectedTeams.length === 2
+              ? 'bg-amber-100 text-amber-800 border-amber-300'
+              : 'bg-pink-100 text-[#E53350] border-pink-200'
+          }`}>
+            {selectedTeams.length}/2 Selected (Max 2)
+          </span>
+        </div>
+
+        <p className="text-xs text-slate-600 mt-1">
+          Select <strong>1 or 2 teams</strong>. If you’re not sure of which to join, kindly go through the R and R expected from each team:
         </p>
         
         {/* R & R Google Doc Link Button */}
         <a
-          href={rrDocUrl || "https://docs.google.com/document/d/1T_2BA6HJObHYxsTqN916tnG_l3V9mNJT5K74ZKjX_oY/edit?usp=sharing"}
+          href={rrDocUrl || "https://docs.google.com/document/d/1dCbhSMp29WAuXs75mYSwqaxSHRCk3fe0s0kRLH7IEKs/edit?usp=drivesdk"}
           target="_blank"
           rel="noopener noreferrer"
           className="inline-flex items-center space-x-1.5 mt-2 px-4 py-1.5 rounded-full bg-white/70 hover:bg-white backdrop-blur-md text-[#E53350] text-xs font-bold border border-pink-200 shadow-xs transition-all hover:scale-[1.02]"
@@ -79,9 +93,13 @@ export default function TeamSelectorCard({ selectedTeams = [], onChange, rrDocUr
         })}
       </div>
       
-      {selectedTeams.length === 0 && (
+      {selectedTeams.length === 0 ? (
         <p className="text-xs text-[#E53350] font-semibold italic">
-          * Tap on the boxes above to select your preferred team(s).
+          * Please tap on 1 or 2 teams above to select your interest.
+        </p>
+      ) : (
+        <p className="text-xs text-emerald-700 font-medium">
+          ✓ {selectedTeams.length} team(s) selected: {selectedTeams.join(', ')}
         </p>
       )}
 
