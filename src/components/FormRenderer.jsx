@@ -12,8 +12,18 @@ const ENGINEERING_DEPARTMENTS = [
   "Mechanical Engineering",
   "Metallurgical and Materials Engineering",
   "Petroleum and Gas Engineering",
+  "Surveying and Geoinformatics Engineering",
   "Systems Engineering",
   "Not in Engineering / Other Faculty"
+];
+
+const LEVEL_OPTIONS = [
+  "100 Level",
+  "200 Level",
+  "300 Level",
+  "400 Level",
+  "500 Level",
+  "600 Level"
 ];
 
 const WHATSAPP_GC_LINK = "https://chat.whatsapp.com/CxqAfQeJAL56uUae1wJ4FA?mode=gi_t";
@@ -346,7 +356,7 @@ export default function FormRenderer({ appsScriptUrl }) {
           />
         </div>
 
-        {/* Level */}
+        {/* Level Dropdown */}
         <div className="space-y-1.5">
           <label className="block text-sm font-bold text-slate-900">
             Level <span className="text-[#E53350]">*</span>
@@ -358,13 +368,9 @@ export default function FormRenderer({ appsScriptUrl }) {
             className="w-full px-4 py-3 pink-input text-sm cursor-pointer"
           >
             <option value="" disabled>Select Level...</option>
-            <option value="100 Level">100 Level</option>
-            <option value="200 Level">200 Level</option>
-            <option value="300 Level">300 Level</option>
-            <option value="400 Level">400 Level</option>
-            <option value="500 Level">500 Level</option>
-            <option value="Postgraduate">Postgraduate</option>
-            <option value="Alumna">Alumna</option>
+            {LEVEL_OPTIONS.map(lvl => (
+              <option key={lvl} value={lvl}>{lvl}</option>
+            ))}
           </select>
         </div>
 
