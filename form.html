@@ -274,26 +274,26 @@
         </select>
       </div>
 
-      <!-- Teams Section (Max 2 Limit) -->
+      <!-- Teams Section (Single Select) -->
       <div class="form-group">
         <div style="display: flex; justify-content: space-between; align-items: center;">
           <label>Which team are you most interested in <span>*</span></label>
-          <span id="teamCounter" style="font-size: 11px; font-weight: 700; color: #E53350; background: #FFE4EC; padding: 2px 10px; border-radius: 20px;">0/2 Selected (Max 2)</span>
+          <span id="teamCounter" style="font-size: 11px; font-weight: 700; color: #E53350; background: #FFE4EC; padding: 2px 10px; border-radius: 20px;">Select 1 Team</span>
         </div>
-        <div style="font-size: 12.5px; color: #555; margin-bottom: 6px;">Select <strong>1 or 2 teams</strong>. If you’re not sure of which to join, kindly go through the R and R expected from each team:</div>
+        <div style="font-size: 12.5px; color: #555; margin-bottom: 6px;">Select <strong>1 team</strong> you are most interested in joining. If you’re not sure of which to join, kindly go through the R and R expected from each team:</div>
         <a href="https://docs.google.com/document/d/1dCbhSMp29WAuXs75mYSwqaxSHRCk3fe0s0kRLH7IEKs/edit?usp=drivesdk" target="_blank" class="rr-link">📄 View Teams R & R Document ↗</a>
         
         <div class="teams-grid" id="teamsGrid">
-          <div class="team-box" onclick="toggleTeam(this, 'Content')"><span>Content</span><div class="tick-icon">✓</div></div>
-          <div class="team-box" onclick="toggleTeam(this, 'Sponsorship')"><span>Sponsorship</span><div class="tick-icon">✓</div></div>
-          <div class="team-box" onclick="toggleTeam(this, 'Marketing')"><span>Marketing</span><div class="tick-icon">✓</div></div>
-          <div class="team-box" onclick="toggleTeam(this, 'Logistics')"><span>Logistics</span><div class="tick-icon">✓</div></div>
-          <div class="team-box" onclick="toggleTeam(this, 'Training')"><span>Training</span><div class="tick-icon">✓</div></div>
-          <div class="team-box" onclick="toggleTeam(this, 'Operations')"><span>Operations</span><div class="tick-icon">✓</div></div>
-          <div class="team-box" onclick="toggleTeam(this, 'Design')"><span>Design</span><div class="tick-icon">✓</div></div>
-          <div class="team-box" onclick="toggleTeam(this, 'Quality Control')"><span>Quality Control</span><div class="tick-icon">✓</div></div>
-          <div class="team-box" onclick="toggleTeam(this, 'External Relations')"><span>External Relations</span><div class="tick-icon">✓</div></div>
-          <div class="team-box" onclick="toggleTeam(this, 'Web Development')"><span>Web Development</span><div class="tick-icon">✓</div></div>
+          <div class="team-box" onclick="selectTeam(this, 'Content')"><span>Content</span><div class="tick-icon">✓</div></div>
+          <div class="team-box" onclick="selectTeam(this, 'Sponsorship')"><span>Sponsorship</span><div class="tick-icon">✓</div></div>
+          <div class="team-box" onclick="selectTeam(this, 'Marketing')"><span>Marketing</span><div class="tick-icon">✓</div></div>
+          <div class="team-box" onclick="selectTeam(this, 'Logistics')"><span>Logistics</span><div class="tick-icon">✓</div></div>
+          <div class="team-box" onclick="selectTeam(this, 'Training')"><span>Training</span><div class="tick-icon">✓</div></div>
+          <div class="team-box" onclick="selectTeam(this, 'Operations')"><span>Operations</span><div class="tick-icon">✓</div></div>
+          <div class="team-box" onclick="selectTeam(this, 'Design')"><span>Design</span><div class="tick-icon">✓</div></div>
+          <div class="team-box" onclick="selectTeam(this, 'Quality Control')"><span>Quality Control</span><div class="tick-icon">✓</div></div>
+          <div class="team-box" onclick="selectTeam(this, 'External Relations')"><span>External Relations</span><div class="tick-icon">✓</div></div>
+          <div class="team-box" onclick="selectTeam(this, 'Web Development')"><span>Web Development</span><div class="tick-icon">✓</div></div>
         </div>
       </div>
 
@@ -317,7 +317,7 @@
         <textarea id="skills" rows="3" required placeholder="Share your strengths..."></textarea>
       </div>
 
-      <!-- NEW FIELD: Proof of Work / Portfolio Links -->
+      <!-- Proof of Work / Portfolio Links -->
       <div class="form-group">
         <label>Proof of Work / Portfolio Links <span style="font-weight: 500; font-size: 12px; color: #666;">(Optional / Recommended)</span></label>
         <textarea id="proof_of_work" rows="2" placeholder="Paste link(s) to your portfolio, GitHub, Google Drive, Canva, social media work, or previous projects..."></textarea>
@@ -426,22 +426,19 @@
     // Paste your Google Apps Script Web App URL here when ready:
     const GOOGLE_APPS_SCRIPT_URL = ""; 
 
-    let selectedTeams = [];
+    let selectedTeam = '';
     let selectedRole = '';
 
-    function toggleTeam(el, team) {
-      if (selectedTeams.includes(team)) {
-        selectedTeams = selectedTeams.filter(t => t !== team);
-        el.classList.remove('selected');
+    function selectTeam(el, team) {
+      document.querySelectorAll('.team-box').forEach(b => b.classList.remove('selected'));
+      if (selectedTeam === team) {
+        selectedTeam = '';
+        document.getElementById('teamCounter').textContent = 'Select 1 Team';
       } else {
-        if (selectedTeams.length >= 2) {
-          alert('You can select a maximum of 2 teams!');
-          return;
-        }
-        selectedTeams.push(team);
         el.classList.add('selected');
+        selectedTeam = team;
+        document.getElementById('teamCounter').textContent = '1 Team Selected ✓';
       }
-      document.getElementById('teamCounter').textContent = selectedTeams.length + '/2 Selected (Max 2)';
     }
 
     function selectRole(el, role) {
@@ -452,8 +449,8 @@
 
     document.getElementById('eliForm').addEventListener('submit', async function(e) {
       e.preventDefault();
-      if (selectedTeams.length === 0) {
-        alert('Please tap to select 1 or 2 teams!');
+      if (!selectedTeam) {
+        alert('Please tap to select 1 team!');
         return;
       }
       if (!selectedRole) {
@@ -469,7 +466,7 @@
         non_engineering: document.getElementById('non_engineering').value,
         level: document.getElementById('level').value,
         role: selectedRole,
-        teams_interested: selectedTeams.join(', '),
+        teams_interested: selectedTeam,
         why_join: document.getElementById('why_join').value,
         skills: document.getElementById('skills').value,
         proof_of_work: document.getElementById('proof_of_work').value,

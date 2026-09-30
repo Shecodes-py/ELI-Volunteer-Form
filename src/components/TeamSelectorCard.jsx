@@ -15,17 +15,12 @@ const TEAMS_LIST = [
 ];
 
 export default function TeamSelectorCard({ selectedTeams = [], onChange, rrDocUrl }) {
-  const handleToggle = (team) => {
+  const handleSelect = (team) => {
+    // Single selection only: if already selected, unselect; otherwise select only this 1 team!
     if (selectedTeams.includes(team)) {
-      // Unselect
-      onChange(selectedTeams.filter(t => t !== team));
+      onChange([]);
     } else {
-      // Select - max 2 teams allowed!
-      if (selectedTeams.length >= 2) {
-        alert("You can select a maximum of 2 teams!");
-        return;
-      }
-      onChange([...selectedTeams, team]);
+      onChange([team]);
     }
   };
 
@@ -39,16 +34,16 @@ export default function TeamSelectorCard({ selectedTeams = [], onChange, rrDocUr
             Which team are you most interested in <span className="text-[#E53350]">*</span>
           </label>
           <span className={`text-xs font-bold px-2.5 py-0.5 rounded-full border ${
-            selectedTeams.length === 2
-              ? 'bg-amber-100 text-amber-800 border-amber-300'
-              : 'bg-pink-100 text-[#E53350] border-pink-200'
+            selectedTeams.length === 1
+              ? 'bg-pink-100 text-[#E53350] border-pink-300'
+              : 'bg-slate-100 text-slate-500 border-slate-200'
           }`}>
-            {selectedTeams.length}/2 Selected (Max 2)
+            {selectedTeams.length === 1 ? '1 Team Selected' : 'Select 1 Team'}
           </span>
         </div>
 
         <p className="text-xs text-slate-600 mt-1">
-          Select <strong>1 or 2 teams</strong>. If you’re not sure of which to join, kindly go through the R and R expected from each team:
+          Select <strong>1 team</strong> you are most interested in joining. If you’re not sure of which to join, kindly go through the R and R expected from each team:
         </p>
         
         {/* R & R Google Doc Link Button */}
@@ -63,7 +58,7 @@ export default function TeamSelectorCard({ selectedTeams = [], onChange, rrDocUr
         </a>
       </div>
 
-      {/* Glassy Interactive Clickable Pink Boxes Grid */}
+      {/* Glassy Interactive Clickable Pink Boxes Grid (Single Select) */}
       <div className="grid grid-cols-2 sm:grid-cols-2 gap-2.5 pt-1">
         {TEAMS_LIST.map((team) => {
           const isSelected = selectedTeams.includes(team);
@@ -71,10 +66,10 @@ export default function TeamSelectorCard({ selectedTeams = [], onChange, rrDocUr
           return (
             <div
               key={team}
-              onClick={() => handleToggle(team)}
+              onClick={() => handleSelect(team)}
               className={`p-3.5 rounded-2xl cursor-pointer transition-all duration-200 flex items-center justify-between ${
                 isSelected
-                  ? 'glass-box-selected text-[#E53350] font-bold'
+                  ? 'glass-box-selected text-[#E53350] font-bold ring-2 ring-[#E53350]/30'
                   : 'glass-box text-slate-700 font-medium'
               }`}
             >
@@ -95,11 +90,11 @@ export default function TeamSelectorCard({ selectedTeams = [], onChange, rrDocUr
       
       {selectedTeams.length === 0 ? (
         <p className="text-xs text-[#E53350] font-semibold italic">
-          * Please tap on 1 or 2 teams above to select your interest.
+          * Please tap on 1 team above to select your preferred team.
         </p>
       ) : (
         <p className="text-xs text-emerald-700 font-medium">
-          ✓ {selectedTeams.length} team(s) selected: {selectedTeams.join(', ')}
+          ✓ Selected team: <strong>{selectedTeams[0]}</strong>
         </p>
       )}
 

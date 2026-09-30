@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import confetti from 'canvas-confetti';
-import { Send, Sparkles, RefreshCw, ExternalLink, MessageCircle, Link } from 'lucide-react';
+import { Send, Sparkles, RefreshCw, ExternalLink, MessageCircle } from 'lucide-react';
 import TeamSelectorCard from './TeamSelectorCard';
 
 const ENGINEERING_DEPARTMENTS = [
@@ -84,13 +84,8 @@ export default function FormRenderer({ appsScriptUrl }) {
     e.preventDefault();
     setErrorMessage('');
 
-    if (selectedTeams.length === 0) {
-      setErrorMessage('Please select 1 or 2 teams you are interested in.');
-      return;
-    }
-
-    if (selectedTeams.length > 2) {
-      setErrorMessage('You can select a maximum of 2 teams.');
+    if (selectedTeams.length !== 1) {
+      setErrorMessage('Please select 1 team you are most interested in.');
       return;
     }
 
@@ -98,7 +93,7 @@ export default function FormRenderer({ appsScriptUrl }) {
 
     const payload = {
       ...formData,
-      teams_interested: selectedTeams.join(', '),
+      teams_interested: selectedTeams[0],
       submitted_at: new Date().toLocaleString()
     };
 
@@ -382,7 +377,7 @@ export default function FormRenderer({ appsScriptUrl }) {
 
         <hr className="border-pink-100" />
 
-        {/* Which team are you most interested in (Max 2) */}
+        {/* Which team are you most interested in (Strictly 1 Team Only) */}
         <TeamSelectorCard
           selectedTeams={selectedTeams}
           onChange={setSelectedTeams}
@@ -442,7 +437,7 @@ export default function FormRenderer({ appsScriptUrl }) {
           />
         </div>
 
-        {/* NEW FIELD: Proof of Work / Portfolio Links */}
+        {/* Proof of Work / Portfolio Links */}
         <div className="space-y-1.5">
           <label className="block text-sm font-bold text-slate-900 flex items-center justify-between">
             <span>Proof of Work / Portfolio Links</span>
